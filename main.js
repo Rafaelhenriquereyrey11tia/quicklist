@@ -46,3 +46,9 @@ function checkItem(itemName) {
         item.checked = !item.checked;
     }
     showItemsList();}
+
+
+
+    function addHideWarnigClass(){
+        document.querySelector(".warning").classList.add("hide-warning")
+    }
