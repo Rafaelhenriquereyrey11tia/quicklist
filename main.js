@@ -1,4 +1,4 @@
-const items=[]
+let items=[]
 
 
 function addItem(){
@@ -37,9 +37,18 @@ function showItemsList() {
                 </button>
             </div>
         `;
-    });
-}
 
+    });
+    localStorage.setItem("items" ,JSON.stringify(items))
+}
+function removeItem(itemName) {
+    const itemIndex = items.findIndex(item => item.name === itemName);
+    if (itemIndex !== -1) {
+        items.splice(itemIndex, 1);
+    }
+    localStorage.setItem("items", JSON.stringify(items)); 
+    showItemsList(); 
+}
 function checkItem(itemName) {
     const item = items.find(item => item.name === itemName);
     if (item) {
@@ -51,4 +60,13 @@ function checkItem(itemName) {
 
     function addHideWarnigClass(){
         document.querySelector(".warning").classList.add("hide-warning")
+    }
+
+    function verifyLocalStorageItems() {
+        const verifyLocalStorageItems = localStorage.getItem("items");
+    
+        if (verifyLocalStorageItems) {
+            items = JSON.parse(verifyLocalStorageItems);
+            showItemsList(); 
+        }
     }
